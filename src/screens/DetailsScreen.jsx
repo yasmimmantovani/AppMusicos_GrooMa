@@ -11,14 +11,17 @@ export default function DetailsScreen({ route, navigation }) {
 
   useEffect(() => {
     // Buscando apenas um usuário pelo ID
-    fetch('https://jsonplaceholder.typicode.com/users/${musicoId}')
+    fetch(`https://jsonplaceholder.typicode.com/users/${musicoId}`)
     .then((response) => response.json())
     .then((json) => {
       setDetalhes(json);
       setCarregando(false);
     })
-    .catch(() => setCarregando(false));
-  }, [musicoId]);
+    .catch((error) => {
+      console.error(error);
+      setCarregando(false);
+    });
+}, [musicoId]);
 
   if (carregando) {
     return (
